@@ -41,5 +41,7 @@ Green wire (TXD): Connect to pin 10 (GPIO15, RXD)
 
 
 sureshk@bflinuxserv:/data/kannaian/CU/systemprj/final-project-sureshkannaian/build/tmp/deploy/images/raspberrypi4-64$ sudo umount /dev/sdd1
-umount: /dev/sdd1: not mounted.
+
+sureshk@bflinuxserv:/data/kannaian/CU/systemprj/final-project-sureshkannaian/build/tmp/deploy/images/raspberrypi4-64$ bmaptool create -o core-image-base-raspberrypi4-64.rootfs.rpi-sdimg.bmap core-image-base-raspberrypi4-64.rootfs.rpi-sdimg
+
 sureshk@bflinuxserv:/data/kannaian/CU/systemprj/final-project-sureshkannaian/build/tmp/deploy/images/raspberrypi4-64$ sudo bmaptool copy core-image-base-raspberrypi4-64.rootfs.rpi-sdimg /dev/sdd
