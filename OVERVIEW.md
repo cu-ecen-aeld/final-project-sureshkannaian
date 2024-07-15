@@ -48,4 +48,4 @@ List of team project members and roles:
 - [Member Name] - [Role]
 
 ## Shared Schedule Page
-Link to the shared schedule page: [Schedule Page Link]
+Link to the shared schedule page: [Schedule Page Link](https://github.com/cu-ecen-aeld/final-project-sureshkannaian/blob/main/SCHEDULE.md)

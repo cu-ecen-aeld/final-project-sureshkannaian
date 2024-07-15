@@ -6,7 +6,7 @@ This repository contains [Student's Name]'s submission for [Project Name].
 
 ## Project Overview
 
-For detailed information about the project, please visit our [Project Overview Page](https://github.com/[username]/[repository]/wiki/Project-Overview).
+For detailed information about the project, please visit our [Project Overview Page](https://github.com/cu-ecen-aeld/final-project-sureshkannaian/blob/main/OVERVIEW.md).
 
 ## Table of Contents
 
