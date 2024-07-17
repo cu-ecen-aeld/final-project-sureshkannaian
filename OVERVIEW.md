@@ -27,8 +27,7 @@ The User RAM Persistent Store project aims to develop a mechanism for storing cu
   - **RAM Oops**: Suited for capturing critical system-level issues.
   - **User RAM Persistent Store**: Lightweight, easy to configure, and suitable for varied applications including user-space watchdogs.
 
-User RAM Persistent Store
-### RAM Oops Pstore Diagram
+### User RAM Persistent Store
 
 ![User RAM Persistent Store Diagram](https://github.com/cu-ecen-aeld/final-project-sureshkannaian/blob/main/overview_image.png)
 
