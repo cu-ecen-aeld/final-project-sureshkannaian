@@ -27,23 +27,10 @@ The User RAM Persistent Store project aims to develop a mechanism for storing cu
   - **RAM Oops**: Suited for capturing critical system-level issues.
   - **User RAM Persistent Store**: Lightweight, easy to configure, and suitable for varied applications including user-space watchdogs.
 
-     +-----------------------------------------+
-     |                 Linux Kernel             |
-     |                                         |
-     | +-------------------------------------+ |
-     | |             User Messages           | |
-     | +-------------------------------------+ |
-     |                   |                     |
-     |                   v                     |
-     | +-------------------------------------+ |
-     | |          User Ram Pstore            | |
-     | |                                     | |
-     | |   +-----------------------------+   | |
-     | |   |   Stored Messages           |   | |
-     | |   +-----------------------------+   | |
-     | +-------------------------------------+ |
-     +-----------------------------------------+
+User RAM Persistent Store
+### RAM Oops Pstore Diagram
 
+![User RAM Persistent Store Diagram](https://github.com/cu-ecen-aeld/final-project-sureshkannaian/blob/main/overview_image.png)
 
 ## Target Build System
 The project uses Yocto.
