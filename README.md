@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains Suresh Kannaian submission for final project User RAM Persistent Store.
+This repository contains Suresh Kannaian submission for final project User RAM Persistent Store using Yocto build system.
 
 ## Project Overview
 
