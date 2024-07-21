@@ -45,3 +45,45 @@ sureshk@bflinuxserv:/data/kannaian/CU/systemprj/final-project-sureshkannaian/bui
 sureshk@bflinuxserv:/data/kannaian/CU/systemprj/final-project-sureshkannaian/build/tmp/deploy/images/raspberrypi4-64$ bmaptool create -o core-image-base-raspberrypi4-64.rootfs.rpi-sdimg.bmap core-image-base-raspberrypi4-64.rootfs.rpi-sdimg
 
 sureshk@bflinuxserv:/data/kannaian/CU/systemprj/final-project-sureshkannaian/build/tmp/deploy/images/raspberrypi4-64$ sudo bmaptool copy core-image-base-raspberrypi4-64.rootfs.rpi-sdimg /dev/sdd
+
+
+
+
+tftpboot ${fdt_addr_r} bcm2711-rpi-4-b.dtb
+fdt addr ${fdt_addr_r}
+tftpboot 0x200000 Image
+fdt get value bootargs /chosen bootargs
+booti 0x200000 - ${fdt_addr_r}
+
+
+sdd
+// u-boot settings
+ethact=bcmgenet
+ipaddr=192.168.100.2
+gateway=192.168.100.1
+	memory@0 {
+		device_type = "memory";
+		reg = <0x00000000 0x00000000 0x38000000 0x00000000 0x40000000 0xbc000000 0x00000001 0x00000000 0x80000000 0x00000001 0x80000000 0x80000000>;
+	};
+
+	memreserve = <0x38000000 0x08000000>;
+	chosen {
+		bootargs = "coherent_pool=1M 8250.nr_uarts=1 snd_bcm2835.enable_headphones=0 snd_bcm2835.enable_hdmi=0  smsc95xx.macaddr=D8:3A:DD:61:7E:A4 vc_mem.mem_base=0x3ec00000 vc_mem.mem_size=0x40000000  dwc_otg.lpm_enable=0 console=ttyS0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait  net.ifnames=0";
+	};
+
+
+tftpboot ${fdt_addr_r} bcm2711-rpi-4-b.dtb
+fdt addr ${fdt_addr_r}
+tftpboot 0x200000 Image
+fdt get value bootargs /chosen bootargs
+booti 0x200000 - ${fdt_addr_r}
+
+//////
+
+work area
+
+bootargs = "coherent_pool=1M 8250.nr_uarts=1 snd_bcm2835.enable_headphones=0 snd_bcm2835.enable_hdmi=0  smsc95xx.macaddr=D8:3A:DD:61:7E:A4 vc_mem.mem_base=0x3ec00000 vc_mem.mem_size=0x40000000  dwc_otg.lpm_enable=0 console=ttyS0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait  net.ifnames=0";
+
+[    0.000000] Kernel command line: coherent_pool=1M 8250.nr_uarts=1 snd_bcm2835.enable_headphones=0 snd_bcm2835.enable_hdmi=0  smsc95xx.macaddr=D8:3A:DD:61:7E:A4 vc_mem.mem_base=0x3ec00000 vc_mem.mem_size=0x40000000  dwc_otg.lpm_enable=0 console=ttyS0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait  net.ifnames=0
+
+////////////////////////////////

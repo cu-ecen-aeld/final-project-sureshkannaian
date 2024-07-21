@@ -1,0 +1,43 @@
+From 84b265ca983c75787346e5c2951dff12f91170f0 Mon Sep 17 00:00:00 2001
+From: Suresh Kannaian <suresh.kannaian@colorado.edu>
+Date: Sat, 20 Jul 2024 18:24:13 -0400
+Subject: [PATCH] tftpboot-patch
+
+Upstream-Status: Inappropriate [Reason: Specific to our project]
+
+---
+ arch/arm/boot/dts/broadcom/bcm2711-rpi-4-b.dts | 3 ++-
+ arch/arm/boot/dts/broadcom/bcm2711-rpi.dtsi    | 2 +-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/broadcom/bcm2711-rpi-4-b.dts b/arch/arm/boot/dts/broadcom/bcm2711-rpi-4-b.dts
+index d3a3a1e4d4c6..269140db25ff 100644
+--- a/arch/arm/boot/dts/broadcom/bcm2711-rpi-4-b.dts
++++ b/arch/arm/boot/dts/broadcom/bcm2711-rpi-4-b.dts
+@@ -265,8 +265,9 @@ soc {
+ #include "bcm283x-rpi-i2c0mux_0_44.dtsi"
+ 
+ / {
++	memreserve = <0x38000000 0x08000000>;
+ 	chosen {
+-		bootargs = "coherent_pool=1M 8250.nr_uarts=1 snd_bcm2835.enable_headphones=0";
++		bootargs = "coherent_pool=1M 8250.nr_uarts=1 snd_bcm2835.enable_headphones=0 snd_bcm2835.enable_hdmi=0  smsc95xx.macaddr=D8:3A:DD:61:7E:A4 vc_mem.mem_base=0x3ec00000 vc_mem.mem_size=0x40000000  dwc_otg.lpm_enable=0 console=ttyS0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait  net.ifnames=0";
+ 	};
+ 
+ 	/delete-node/ wifi-pwrseq;
+diff --git a/arch/arm/boot/dts/broadcom/bcm2711-rpi.dtsi b/arch/arm/boot/dts/broadcom/bcm2711-rpi.dtsi
+index 7b9e946db985..9c8633cec4db 100644
+--- a/arch/arm/boot/dts/broadcom/bcm2711-rpi.dtsi
++++ b/arch/arm/boot/dts/broadcom/bcm2711-rpi.dtsi
+@@ -7,7 +7,7 @@ / {
+ 	/* Will be filled by the bootloader */
+ 	memory@0 {
+ 		device_type = "memory";
+-		reg = <0 0 0>;
++		reg = <0x00000000 0x00000000 0x38000000 0x00000000 0x40000000 0xbc000000 0x00000001 0x00000000 0x80000000 0x00000001 0x80000000 0x80000000>;
+ 	};
+ 
+ 	aliases {
+-- 
+2.43.0
+

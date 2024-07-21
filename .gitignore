@@ -2,3 +2,7 @@ build
 .vscode
 valgrind-out.txt
 test.sh.log
+scratch
+scratchfiles/putty_lone_fdt_print.log
+scratchfiles/putty_uboot_fdt_print.log
+scratchfiles/putty.log
