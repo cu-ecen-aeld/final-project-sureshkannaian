@@ -87,3 +87,6 @@ bootargs = "coherent_pool=1M 8250.nr_uarts=1 snd_bcm2835.enable_headphones=0 snd
 [    0.000000] Kernel command line: coherent_pool=1M 8250.nr_uarts=1 snd_bcm2835.enable_headphones=0 snd_bcm2835.enable_hdmi=0  smsc95xx.macaddr=D8:3A:DD:61:7E:A4 vc_mem.mem_base=0x3ec00000 vc_mem.mem_size=0x40000000  dwc_otg.lpm_enable=0 console=ttyS0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait  net.ifnames=0
 
 ////////////////////////////////
+
+https://docs.yoctoproject.org/2.2/kernel-dev/kernel-dev.html
+poky/meta-skeleton/recipes-kernel/hello-mod/hello-mod_0.1.bb
