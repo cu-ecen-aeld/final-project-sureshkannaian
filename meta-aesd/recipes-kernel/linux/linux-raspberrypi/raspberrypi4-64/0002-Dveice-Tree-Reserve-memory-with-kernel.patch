@@ -1,0 +1,66 @@
+From b7e0593a152f94ab44d2de6c47475f5537c334e8 Mon Sep 17 00:00:00 2001
+From: Suresh Kannaian <suresh.kannaian@colorado.edu>
+Date: Sun, 28 Jul 2024 18:23:29 -0400
+Subject: [PATCH] Dveice Tree - Reserve memory with kernel for persistent store
+
+Upstream-Status: Inappropriate [Reason: Specific to our project]
+
+---
+ arch/arm/boot/dts/broadcom/bcm2711-rpi-4-b.dts |  4 ++--
+ arch/arm/boot/dts/broadcom/bcm2711-rpi.dtsi    | 17 ++++++++++++++++-
+ 2 files changed, 18 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm/boot/dts/broadcom/bcm2711-rpi-4-b.dts b/arch/arm/boot/dts/broadcom/bcm2711-rpi-4-b.dts
+index 269140db25ff..8f23f1a9681e 100644
+--- a/arch/arm/boot/dts/broadcom/bcm2711-rpi-4-b.dts
++++ b/arch/arm/boot/dts/broadcom/bcm2711-rpi-4-b.dts
+@@ -265,9 +265,9 @@ soc {
+ #include "bcm283x-rpi-i2c0mux_0_44.dtsi"
+ 
+ / {
+-	memreserve = <0x38000000 0x08000000>;
++	memreserve = <0x38000000  0x08000000>;
+ 	chosen {
+-		bootargs = "coherent_pool=1M 8250.nr_uarts=1 snd_bcm2835.enable_headphones=0 snd_bcm2835.enable_hdmi=0  smsc95xx.macaddr=D8:3A:DD:61:7E:A4 vc_mem.mem_base=0x3ec00000 vc_mem.mem_size=0x40000000  dwc_otg.lpm_enable=0 console=ttyS0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait  net.ifnames=0";
++		bootargs = "coherent_pool=1M 8250.nr_uarts=1 snd_bcm2835.enable_headphones=0 snd_bcm2835.enable_hdmi=0  smsc95xx.macaddr=D8:3A:DD:61:7E:A4 vc_mem.mem_base=0x3ec00000 vc_mem.mem_size=0x40000000  dwc_otg.lpm_enable=0 console=ttyS0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait  net.ifnames=0 ip=192.168.100.2::192.168.1.1:255.255.255.0::eth0:off";
+ 	};
+ 
+ 	/delete-node/ wifi-pwrseq;
+diff --git a/arch/arm/boot/dts/broadcom/bcm2711-rpi.dtsi b/arch/arm/boot/dts/broadcom/bcm2711-rpi.dtsi
+index 9c8633cec4db..7dc30fe4f07f 100644
+--- a/arch/arm/boot/dts/broadcom/bcm2711-rpi.dtsi
++++ b/arch/arm/boot/dts/broadcom/bcm2711-rpi.dtsi
+@@ -7,7 +7,7 @@ / {
+ 	/* Will be filled by the bootloader */
+ 	memory@0 {
+ 		device_type = "memory";
+-		reg = <0x00000000 0x00000000 0x38000000 0x00000000 0x40000000 0xbc000000 0x00000001 0x00000000 0x80000000 0x00000001 0x80000000 0x80000000>;
++		reg = <0x40000000 0xbc000000 0x80000000 0x80000000>;
+ 	};
+ 
+ 	aliases {
+@@ -17,6 +17,21 @@ aliases {
+ 		blconfig = &blconfig;
+ 		blpubkey = &blpubkey;
+ 	};
++    reserved-memory {
++        #address-cells = <2>;
++        #size-cells = <2>;
++        ranges;
++
++    	uzrramstore_region: region@7FFF0000 {
++            no-map;
++            reg = <0x0 0x7FFF0000 0x0 0x10000>;
++        };
++    };
++
++    uzrramstore {
++        compatible = "uzrramstore";
++        memory-region = <&uzrramstore_region>;
++    };
+ };
+ 
+ &firmware {
+-- 
+2.43.0
+

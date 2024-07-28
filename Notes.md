@@ -90,3 +90,12 @@ bootargs = "coherent_pool=1M 8250.nr_uarts=1 snd_bcm2835.enable_headphones=0 snd
 
 https://docs.yoctoproject.org/2.2/kernel-dev/kernel-dev.html
 poky/meta-skeleton/recipes-kernel/hello-mod/hello-mod_0.1.bb
+
+
+https://www.raspberrypi.com/documentation/computers/config_txt.html#what-is-config-txt
+
+
+cp -L bcm2711-rpi-4-b.dtb /var/lib/tftpboot/
+cp /data/kannaian/CU/systemprj/final-project-sureshkannaian/build/tmp/work/raspberrypi4_64-poky-linux/uzrramstore-mod/0.1/sources/uzrramstore.ko /var/lib/tftpboot/
+
+

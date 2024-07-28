@@ -16,4 +16,14 @@ UNPACKDIR = "${S}"
 # The inherit of module.bbclass will automatically name module packages with
 # "kernel-module-" prefix as required by the oe-core build environment.
 
-RPROVIDES:${PN} += "kernel-module-uzrramstore"
+RPROVIDES:${PN} += "uzrramstore-mod"
+
+
+KERNEL_MODULE_AUTOLOAD = "uzrramstore"
+
+do_install() {
+    install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/extra
+    install -m 0644 ${B}/uzrramstore.ko ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/extra/
+}
+
+FILES_${PN} = "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/extra/uzrramstore.ko"

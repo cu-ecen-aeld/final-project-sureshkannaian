@@ -2,6 +2,8 @@
 #include <linux/fs.h>
 #include <linux/cdev.h>
 #include <linux/uaccess.h>
+#include <linux/of.h>
+#include <linux/of_address.h>
 
 #define DEVICE_NAME "uzrramstore"
 #define CLASS_NAME  "uzrram"
@@ -11,6 +13,9 @@ static char   message[256] = {0};
 static short  size_of_message;
 static struct class*  uzrramClass  = NULL;
 static struct device* uzrramDevice = NULL;
+
+static void __iomem *mem_base;
+static size_t mem_size;
 
 static int     dev_open(struct inode *, struct file *);
 static int     dev_release(struct inode *, struct file *);
@@ -26,7 +31,40 @@ static struct file_operations fops =
 };
 
 static int __init uzrramstore_init(void){
+   struct device_node *npName;
+   struct device_node *np;
+   struct resource res;
+
    printk(KERN_INFO "UZR_RAM_Store: Initializing the UZRRAMStore LKM\n");
+
+   npName = of_find_node_by_name(NULL, "uzrramstore");
+   if (!npName) {
+      printk(KERN_ALERT "UZR_RAM_Store: Device tree node not found\n");
+      return -ENODEV;
+   }
+
+   np = of_parse_phandle(npName, "memory-region", 0);
+   if (!np) {
+      printk(KERN_ALERT "UZR_RAM_Store: Device tree node not found\n");
+      return -ENODEV;
+   }
+
+
+   if (of_address_to_resource(np, 0, &res)) {
+      printk(KERN_ALERT "UZR_RAM_Store: Cannot get reserved memory resource\n");
+      return -ENODEV;
+   }
+   mem_size = resource_size(&res);
+   printk(KERN_INFO "UZR_RAM_Store: Reserved memory at %pa, size %zu\n", &res.start, mem_size);
+
+   mem_base = memremap(res.start, resource_size(&res), MEMREMAP_WB);
+   if (!mem_base) {
+      printk(KERN_ALERT "UZR_RAM_Store: Failed to remap reserved memory\n");
+      return -ENOMEM;
+   }
+   mem_size = resource_size(&res);
+   printk(KERN_INFO "UZR_RAM_Store: remapped memory at %pa to %p\n", &res.start, mem_base);
+
 
    majorNumber = register_chrdev(0, DEVICE_NAME, &fops);
    if (majorNumber<0){
