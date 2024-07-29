@@ -120,9 +120,21 @@ static ssize_t dev_read(struct file *filep, char *buffer, size_t len, loff_t *of
 }
 
 static ssize_t dev_write(struct file *filep, const char *buffer, size_t len, loff_t *offset){
-   sprintf(message, "%s(%zu letters)", buffer, len);
-   size_of_message = strlen(message);
-   printk(KERN_INFO "UZR_RAM_Store: Received %zu characters from the user\n", len);
+   // Ensure we don't write beyond the reserved memory size
+   if (*offset >= mem_size) {
+      return -ENOMEM;
+   }
+
+   if (*offset + len > mem_size) {
+      len = mem_size - *offset; // Adjust the length to fit the reserved memory
+   }
+
+   if (copy_from_user(mem_base + *offset, buffer, len) != 0) {
+      return -EFAULT;
+   }
+
+   printk(KERN_INFO "UZR_RAM_Store: Received %zu bytes from the user\n", len);
+   *offset += len;
    return len;
 }
 
