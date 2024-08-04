@@ -42,5 +42,5 @@ For detailed information about the project, please visit our [Project Overview P
 
 | Sprint 3 Issues                    | Assignee    | DoD                                                                 | Status  | Blockers       |
 |----------------------------------|-------------|----------------------------------------------------------------------|---------|----------------|
-| Implement read from Message Store | SureshK | Persistent storage read developed for custom user messages    | Planned | Reserve memory with device tree |
-| Implement sysfs interface | SureshK | sysfs interface available in userspace    | Planned | Reserve memory with device tree |
+| Implement read from Message Store | SureshK | Persistent storage read developed for custom user messages(https://github.com/cu-ecen-aeld/final-project-sureshkannaian/commit/1bb2886439616c8c556846afc1fcbec792f44ac8)    | Done | |
+| Implement sysfs interface | SureshK | sysfs interface available in userspace(https://github.com/cu-ecen-aeld/final-project-sureshkannaian/commit/1bb2886439616c8c556846afc1fcbec792f44ac8)    | Done | |
